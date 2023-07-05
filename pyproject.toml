@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 name = "ochsner_web2com"
 version = "0.1.0"
 authors = [
-  { name="Alexander Hackl", email="pipy@eccoz.de" },
+  { name="Alexander Hackl", email="pypi@eccoz.de" },
 ]
 description = "Access to the ochsner web2com interface"
 readme = "README.md"
