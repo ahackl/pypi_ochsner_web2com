@@ -22,10 +22,10 @@ Example
     print(result)
 
     ## get value via predefined enum
-    result = w2c.get(HEAT_PUMP.Thermal_energy_kWh)
+    result = w2c.get(web2com.HEAT_PUMP.Thermal_energy_kWh)
     print(result)
     ## set value via predefined enum
-    result = w2c.set(HEATING_CIRCUIT.Normal_setpoint_room_temperature_heating, 20.0)
+    result = w2c.set(web2com.HEATING_CIRCUIT.Normal_setpoint_room_temperature_heating, 20.0)
     print(result)
 
     ## get values via list of id's (eBus and device will be added)

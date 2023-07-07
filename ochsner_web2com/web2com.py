@@ -171,7 +171,7 @@ class Service:
                 id = self.get_chain_id(enum_id)
             else:
                 id = self.get_chain_id(enum_id.value)
-            result = w2c.get_value(id)
+            result = self.get_value(id)
             return (result)
         except:
             return (0, 0.0)
@@ -182,7 +182,7 @@ class Service:
                 id = self.get_chain_id(enum_id)
             else:
                 id = self.get_chain_id(enum_id.value)
-            result = w2c.set_value(id, command_value)
+            result = self.set_value(id, command_value)
             return (result)
         except:
             return (0, 0.0)

@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "ochsner_web2com"
-version = "0.1.4"
+version = "0.1.6"
 authors = [
   { name="Alexander Hackl", email="pypi@eccoz.de" },
 ]
@@ -18,8 +18,7 @@ classifiers = [
 ]
 dependencies = [
     "requests",
-    "xmltodict",
-    "enum"
+    "xmltodict"
 ]
 
 [project.urls]
