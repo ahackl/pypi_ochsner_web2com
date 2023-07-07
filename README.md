@@ -6,13 +6,33 @@ Example
 
 ```python
     import ochsner_web2com.web2com as w2c
+    
+    ## Connect to a web2com server with default eBus and device id.
+    w2c = Service('192.168.188.50', 'OEM', 'password')
 
-    web2com = w2c.Service('192.168.188.50', 'OEM', 'password')
+    ## Change the id's of ebus or device.
+    w2c.set_eBus_id(1)
+    w2c.set_device_id(2)
 
-    result = web2com.get_value('/1/2/1/125/9')
+    ## get value via chain id
+    result = w2c.get_value('/1/2/1/125/9')
+    print(result)
+    ## set value via chain id
+    result = w2c.set_value('/1/2/4/99/6', 20.0)
     print(result)
 
-    result = web2com.set_value('/1/2/4/99/6', 20.0)
+    ## get value via predefined enum
+    result = w2c.get(HEAT_PUMP.Thermal_energy_kWh)
+    print(result)
+    ## set value via predefined enum
+    result = w2c.set(HEATING_CIRCUIT.Normal_setpoint_room_temperature_heating, 20.0)
+    print(result)
+
+    ## get values via list of id's (eBus and device will be added)
+    result = w2c.get([1, 125, 9])
+    print(result)
+    ## set value via list of id's (eBus and device will be added)
+    result = w2c.set([4, 99, 6], 20.0)
     print(result)
 ```
 The first parameter of the result holds the HTTP result code
