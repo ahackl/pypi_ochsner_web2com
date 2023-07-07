@@ -5,10 +5,10 @@
 Example
 
 ```python
-    import ochsner_web2com.web2com as w2c
+    import ochsner_web2com.web2com as web2com
     
     ## Connect to a web2com server with default eBus and device id.
-    w2c = Service('192.168.188.50', 'OEM', 'password')
+    w2c = web2com.Service('192.168.188.50', 'OEM', 'password')
 
     ## Change the id's of ebus or device.
     w2c.set_eBus_id(1)
