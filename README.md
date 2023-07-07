@@ -5,7 +5,9 @@
 Example
 
 ```python
-    web2com = Web2com('192.168.188.50', 'OEM', 'password')
+    import ochsner_web2com.web2com as w2c
+
+    web2com = w2c.Service('192.168.188.50', 'OEM', 'password')
 
     result = web2com.get_value('/1/2/1/125/9')
     print(result)
@@ -18,7 +20,7 @@ and the second paramter the value of the paramter.
 
 Paramter List:
 
-| Description | ID |
+| Description | ID chain |
 | --------------- | --------------- |
 | heat pump: State heat generator control | /1/2/1/125/0 | 
 | heat pump: Flow temperature heat generator | /1/2/1/125/1 |
@@ -37,8 +39,8 @@ Paramter List:
 | auxiliary: Flow temperature heat generator | /1/2/2/126/1 |
 | auxiliary: Operation cycles | /1/2/2/126/2 |
 | auxiliary: Operation hours | /1/2/2/126/3 |
-| auxiliary: Thermal energy kWh | /1/2/2/126/3 |
-| auxiliary: Thermal energy MWh | /1/2/2/126/3 |
+| auxiliary: Thermal energy kWh | /1/2/2/126/4 |
+| auxiliary: Thermal energy MWh | /1/2/2/126/5 |
 | heating circuit: State heating circuit control | /1/2/4/119/0 |
 | heating circuit: Outdoor temperature | /1/2/4/119/1 |
 | heating circuit: Outdoor temperature average value | /1/2/4/119/2 |
@@ -48,10 +50,22 @@ Paramter List:
 | DHW: State DHW control | /1/2/7/121/0 |
 | DHW: Actual DHW temperature | /1/2/7/121/1 |
 | DHW: DHW setpoint | /1/2/7/121/2 |
+| Manager: Storage tank temperature top | /1/2/8/122/0 |
 | Manager: Storage tank temperature center | /1/2/8/122/1 |
 | Manager: Plant flow temperature | /1/2/8/122/2 |
 | Manager: Plant CH setpoint flow temperature | /1/2/8/122/3 |
 | Manager: Heating power in heating mode | /1/2/8/122/4 |
 | Manager: Heating power in DHW mode | /1/2/8/122/5 |
 | Manager: State heating manager | /1/2/8/122/6 |
-| Manager: Storage tank temperature top | /1/2/8/122/6 |
+
+
+Default paramter:
+
+| Description | ID |
+| ----------- | -- |
+| eBus | 1 | 
+| device | 2 |
+
+
+
+
