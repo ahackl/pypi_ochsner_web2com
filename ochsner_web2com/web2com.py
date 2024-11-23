@@ -48,6 +48,9 @@ class MANAGER(Enum):
     Heating_power_in_DHW_mode = [8, 122, 5]
     State_heating_manager = [8, 122, 6]
 
+class AUTH(Enum):
+    BASIC = 0
+    DIGEST = 1
 
 class Service:
      
@@ -56,17 +59,20 @@ class Service:
         ip_number: str,
         user_name: str,
         password: str,
+        auth = AUTH.DIGEST,
         **kwargs,
     ):
         assert ip_number, "IP number must be defined"
         assert user_name, "User name must be defined"
         assert password, "Password must be defined"
-        
+        assert auth, "Authentication method must be defined"
+
         self.chain_seperator = "/"
 
         self.ip_number = ip_number
         self.user_name = user_name
         self.password = password
+        self.auth = auth
 
         self.eBus_id = 1
         self.device_id = 2
@@ -75,6 +81,12 @@ class Service:
         self.eBus_id = eBus
     def set_device_id(self, device = 2):
         self.device_id = device
+
+    def get_auth_method(self):
+        if self.auth == AUTH.DIGEST:
+            return requests.auth.HTTPDigestAuth(self.user_name, self.password)
+        else:
+            return requests.auth.HTTPBasicAuth(self.user_name, self.password)
 
     def get_value(self, command_id_sequence):
         url = "http://" + self.ip_number + "/ws"
@@ -102,7 +114,7 @@ class Service:
             session = requests.Session()
             result = session.post(url,  
                                 data = payload, 
-                                auth = requests.auth.HTTPDigestAuth(self.user_name, self.password))
+                                auth = self.get_auth_method())
             value = 0.0
             if result.status_code == 200:
                 python_dict = xmltodict.parse(result.content)
@@ -144,7 +156,7 @@ class Service:
             session = requests.Session()
             result = session.post(url,  
                                 data = payload, 
-                                auth = requests.auth.HTTPDigestAuth(self.user_name, self.password))
+                                auth = self.get_auth_method())
             value = 0.0
             if result.status_code == 200:
                 value = float(command_value)
@@ -191,6 +203,7 @@ class Service:
 if __name__ == '__main__':
     
     ## Connect to a web2com server with default eBus and device id.
+    ## Use Digest access authentication as default
     w2c = Service('192.168.188.50', 'OEM', 'password')
 
     ## Change the id's of ebus or device.
@@ -217,4 +230,13 @@ if __name__ == '__main__':
     ## set value via list of id's (eBus and device will be added)
     result = w2c.set([4, 99, 6], 20.0)
     print(result)
+
+    ## Connect to a web2com server with default eBus and device id.
+    ## Use Basic access authentication
+    w2c_basic = Service('192.168.188.50', 'OEM', 'password', auth=AUTH.BASIC)
+
+    ## get value via chain id
+    result = w2c_basic.get_value('/1/2/1/125/9')
+    print(result)
+   
 
