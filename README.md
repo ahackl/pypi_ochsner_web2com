@@ -8,6 +8,7 @@ Example
     import ochsner_web2com.web2com as web2com
     
     ## Connect to a web2com server with default eBus and device id.
+    ## Use Digest access authentication as default
     w2c = web2com.Service('192.168.188.50', 'OEM', 'password')
 
     ## Change the id's of ebus or device.
@@ -33,6 +34,14 @@ Example
     print(result)
     ## set value via list of id's (eBus and device will be added)
     result = w2c.set([4, 99, 6], 20.0)
+    print(result)
+
+    ## Connect to a web2com server with default eBus and device id.
+    ## Use Basic access authentication
+    w2c_basic = Service('192.168.188.50', 'OEM', 'password', auth=AUTH.BASIC)
+
+    ## get value via chain id
+    result = w2c_basic.get_value('/1/2/1/125/9')
     print(result)
 ```
 The first parameter of the result holds the HTTP result code
